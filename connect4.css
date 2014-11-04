@@ -2,7 +2,30 @@ body {
 
 }
 
-
 #board {
+	background: url("resources/board.png") no-repeat;
+	position: relative;
+	width: 347px;
+	height: 299px;
+}
+
+td {
+	width: 46px;
+	height: 47px;
+}
+
+.red-piece {
 	background-color: red;
+	height: 47px;
+	-moz-border-radius: 39px;
+	-webkit-border-radius: 39px;
+	width: 46px;
+}
+
+.black-piece {
+	background-color: blue;
+	height: 47px;
+	-moz-border-radius: 39px;
+	-webkit-border-radius: 39px;
+	width: 46px;
 }
