@@ -21,7 +21,7 @@ td {
 }
 
 .black-piece {
-	background-color: blue;
+	background-color: black;
 	height: 47px;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
