@@ -16,10 +16,8 @@ td {
 
 .red-piece {
 	background-color: red;
-	height: 47px;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
-	width: 46px;
 }
 
 .black-piece {
