@@ -14,13 +14,13 @@ td {
 	height: 47px;
 }
 
-.red-piece {
+.Red-piece {
 	background-color: red;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
 }
 
-.black-piece {
+.Black-piece {
 	background-color: black;
 	height: 47px;
 	-moz-border-radius: 39px;

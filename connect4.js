@@ -36,11 +36,12 @@ var model = {
 };
 
 var view = {
-	displayPiece : function(location) {
-		var playerClass = 'red-piece';
-		if (!model.redTurn)
-			playerClass = 'black-piece';
-		$('#' + location).addClass(playerClass);
+	displayPiece : function(move) {		
+		var playerClass = move.player + '-piece';
+		var moveLocation = '#' + (model.numRows - move.row - 1) + move.col; //Convert row so on bottom
+		console.log("moveLocation: " + moveLocation + ", playerClass: " + playerClass);
+		
+		$(moveLocation).addClass(playerClass);
 	},
 
 	setMsg : function(msg) {
@@ -72,6 +73,20 @@ var controller = {
 			//Print turn msg
 			view.setMsg(model.currentPlayer + '\'s turn.');
 		}
+	},
+
+	handleMove : function(move) {		
+		//Find next free row in column
+		var i = 0;
+		while (model.board[move.col][i] !== undefined) i++;
+		move.row = i;
+		console.log("Next row in col " + move.col + ": " + move.row);
+
+		//Inset piece into board array
+		model.board[move.col][move.row] = move.player;
+		
+		//Update view
+		view.displayPiece(move);
 	},
 
 	checkForWin : function() {
@@ -138,7 +153,7 @@ var moveObj = function(player, cellID){
 	//Code in case row is needed
 	// this.row = model.numRows - cellID[0] -1; //Flip row number so row 0 is at bottom
 	this.col = cellID[1];
-	console.log("Move: player: " + this.row + ", col: " + this.col);
-};
+	console.log("Move: player: " + this.player + ", col: " + this.col);
+	};
 
 
