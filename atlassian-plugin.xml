@@ -1,0 +1,14 @@
+<atlassian-plugin key="com.atlassian.plugins.jquery" name="jquery" plugins-version="3">
+    <plugin-info>
+        <description>Atlassian plugin wrapper containing only jQuery.</description>
+        <version>1.7.2</version>
+        <permissions>
+            <permission>execute_java</permission>
+        </permissions>
+    </plugin-info>
+
+    <web-resource key="jquery" name="jquery web-resource">
+        <resource type="download" name="jquery.js" location="/jquery.js"/>
+    </web-resource>
+    
+</atlassian-plugin>

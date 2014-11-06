@@ -39,8 +39,11 @@ var model = {
 		if((this.checkNumInRow(0, 1)) + ((this.checkNumInRow(0, -1))) >= 3) return true;
 		//check vertical
 		else if((this.checkNumInRow(1, 0)) + ((this.checkNumInRow(-1, 0))) >= 3) return true;
-		//Check diagonal
+		//Check diagonal1
 		else if((this.checkNumInRow(1, 1)) + ((this.checkNumInRow(-1, -1))) >= 3) return true;
+		//Check diagonal2
+		else if((this.checkNumInRow(-1, 1)) + ((this.checkNumInRow(1, -1))) >= 3) return true;
+
 		else return false;
 	},
 

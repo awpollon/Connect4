@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: jcreenaune
+Build-Jdk: 1.7.0_21
+Atlassian-Build-Date: 2013-11-12T11:42:44+1100
+Atlassian-Plugin-Key: com.atlassian.plugins.jquery
+Bnd-LastModified: 1384216964471
+Bundle-Description: Atlassian plugin wrapper containing only jQuery.
+Bundle-DocURL: http://www.atlassian.com/
+Bundle-License: https://maven.atlassian.com/public/licenses/license.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: jquery
+Bundle-SymbolicName: com.atlassian.plugins.jquery
+Bundle-Vendor: Atlassian
+Bundle-Version: 1.7.2
+Spring-Context: *
+Tool: Bnd-1.50.0
+
