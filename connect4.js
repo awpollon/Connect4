@@ -104,6 +104,7 @@ var controller = {
 			//Print draw messege
 			view.setMsg("Board is full. It's a draw!");
 			//End game
+			model.gameActive = false;
 		} else {
 			//If game isn't over, switch to other player
 			this.updateTurn();
