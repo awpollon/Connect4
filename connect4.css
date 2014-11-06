@@ -24,6 +24,7 @@ td {
 	background-color: red;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
+	position: fixed;
 }
 
 .Black-piece {
@@ -32,4 +33,5 @@ td {
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
 	width: 46px;
+	position: fixed;
 }

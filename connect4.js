@@ -76,12 +76,16 @@ var view = {
 		//Convert row so on bottom
 		console.log("moveLocation: " + moveLocation + ", playerClass: " + playerClass);
 
+		var moveColID = '#C' + model.move.col;
+		$(moveColID).addClass(playerClass);
+
 		$(moveLocation).addClass(playerClass);
 	},
 
 	setMsg : function(msg) {
 		$('#msg').text(msg);
 	}
+	
 };
 
 var controller = {
