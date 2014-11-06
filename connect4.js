@@ -93,6 +93,7 @@ var controller = {
 		if (model.checkForWin()) {
 			//Highlight winning pieces (using view method)
 			//Display winning messege (using view method)
+			alert(model.currentPlayer + " Wins!");
 			view.setMsg(model.currentPlayer + " Wins!");
 			//End game
 			model.gameActive = false;
