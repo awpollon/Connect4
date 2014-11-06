@@ -12,6 +12,7 @@ $(document).ready(function() {
 });
 
 var model = {
+	move : undefined, //Current move
 	gameActive : true,
 	redTurn : true, //Red always goes first. Update turn method assumes this
 	currentPlayer : "Red",
@@ -20,27 +21,61 @@ var model = {
 	numRows : 6,
 	numPiecesPlayed : 0, //Number of pieces in the game (divide by 2  and floow to get turn number)
 
-	initBoard: function(){
-		for(var i=0; i<this.numCols; i++) {
+	initBoard : function() {
+		for (var i = 0; i < this.numCols; i++) {
 			this.board[i] = new Array(this.numRows);
 		}
 	},
 
-	isValidMove: function(move) {
+	isValidMove : function() {
 		//Check if selected column is full by seeing if there is a value in top row
-		var validMove = (this.board[move.col][this.numRows-1] === undefined);
+		var validMove = (this.board[this.move.col][this.numRows - 1] === undefined);
 		console.log("validMove: " + validMove);
 		return validMove;
-	}
-	
+	},
+
+	checkForWin : function() {
+		//Check horizontal
+		if((this.checkNumInRow(0, 1)) + ((this.checkNumInRow(0, -1))) >= 3) return true;
+		//check vertical
+		else if((this.checkNumInRow(1, 0)) + ((this.checkNumInRow(-1, 0))) >= 3) return true;
+		//Check diagonal
+		else if((this.checkNumInRow(1, 1)) + ((this.checkNumInRow(-1, -1))) >= 3) return true;
+		else return false;
+	},
+
+	checkNumInRow : function(rowMod, colMod) {
+		//Check in each direction for 4 in a row, modifiers specified direction
+		var numOnSide = 0;
+		var r = parseInt(this.move.row);
+		var c = parseInt(this.move.col);
+
+		while (numOnSide < 3) {
+			r += parseInt(rowMod);
+			c += parseInt(colMod);
+			
+			//Check for board boudnary
+			if (r >= this.numRows || c >= this.numCols || c < 0 || r < 0)
+				break;
+			else if (this.board[c][r] === this.move.player) {
+				console.log("Match found at col: " + c +", row: " + r + "for " + this.move.player);
+				numOnSide++;
+			} else
+				break;
+		}
+		console.log("Found " + numOnSide + " on side " + rowMod + ", " + colMod + " for " + this.move.player);
+
+		return numOnSide;
+	},
 };
 
 var view = {
-	displayPiece : function(move) {		
-		var playerClass = move.player + '-piece';
-		var moveLocation = '#' + (model.numRows - move.row - 1) + move.col; //Convert row so on bottom
+	displayPiece : function() {
+		var playerClass = model.move.player + '-piece';
+		var moveLocation = '#' + (model.numRows - model.move.row - 1) + model.move.col;
+		//Convert row so on bottom
 		console.log("moveLocation: " + moveLocation + ", playerClass: " + playerClass);
-		
+
 		$(moveLocation).addClass(playerClass);
 	},
 
@@ -55,11 +90,12 @@ var controller = {
 		model.numPiecesPlayed++;
 
 		//Check for connect 4
-		if (this.checkForWin()) {
+		if (model.checkForWin()) {
 			//Highlight winning pieces (using view method)
 			//Display winning messege (using view method)
 			view.setMsg(model.currentPlayer + " Wins!");
-			//End game (controller method)
+			//End game
+			model.gameActive = false;
 		}
 
 		//If not connect4, check if board is full
@@ -75,25 +111,19 @@ var controller = {
 		}
 	},
 
-	handleMove : function(move) {		
+	handleMove : function() {
 		//Find next free row in column
 		var i = 0;
-		while (model.board[move.col][i] !== undefined) i++;
-		move.row = i;
-		console.log("Next row in col " + move.col + ": " + move.row);
+		while (model.board[model.move.col][i] !== undefined)
+		i++;
+		model.move.row = i;
+		console.log("Next row in col " + model.move.col + ": " + model.move.row);
 
 		//Inset piece into board array
-		model.board[move.col][move.row] = move.player;
-		
+		model.board[model.move.col][model.move.row] = model.move.player;
+
 		//Update view
-		view.displayPiece(move);
-	},
-
-	checkForWin : function() {
-		//Scan game board for 4 in a row, return true if foudn
-
-		//Delete me
-		return false;
+		view.displayPiece();
 	},
 
 	isBoardFull : function() {
@@ -126,19 +156,18 @@ function init() {
 		if (model.gameActive) {
 			//Display a piece at that location (for testing)
 			// view.displayPiece(this.id);
-			
+
 			//Create new moveObj
-			var move = new moveObj(model.currentPlayer, this.id);
-			
+			model.move = new moveObj(model.currentPlayer, this.id);
+
 			//Check for valid move
-			if (model.isValidMove(move)) {
+			if (model.isValidMove()) {
 				//Handle move
-				controller.handleMove(move);
-				
+				controller.handleMove();
+
 				//End the turn
 				controller.endTurn();
-			}
-			else {
+			} else {
 				view.setMsg("That column is full. Please select another.");
 			}
 
@@ -148,12 +177,11 @@ function init() {
 }
 
 //Object to store move information
-var moveObj = function(player, cellID){
+var moveObj = function(player, cellID) {
 	this.player = player;
 	//Code in case row is needed
 	// this.row = model.numRows - cellID[0] -1; //Flip row number so row 0 is at bottom
 	this.col = cellID[1];
 	console.log("Move: player: " + this.player + ", col: " + this.col);
-	};
-
+};
 
