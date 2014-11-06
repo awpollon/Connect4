@@ -16,7 +16,7 @@ var model = {
 	numRows: 6
 
 };
-
+//Comment
 var view = {
 	displayPiece: function(location) {
 		var playerClass = 'red-piece';
