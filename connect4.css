@@ -42,6 +42,10 @@ td {
 	width: 46px;
 }
 
+.pageButton {
+	text-align: center;
+}
+
 footer {
 	text-align: right;
 }

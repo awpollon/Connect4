@@ -175,6 +175,12 @@ function init() {
 		}
 		//Else game is over, do nothing
 	});
+	
+	$("#restart").click(function() {
+		window.location.reload();
+		});
+		
+
 }
 
 //Object to store move information
