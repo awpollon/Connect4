@@ -15,14 +15,24 @@ var model = {
 	gameActive : true,
 	redTurn : true, //Red always goes first. Update turn method assumes this
 	currentPlayer : "Red",
-	board : [[]],
+	board : [[]], //board[column][row]
 	numCols : 7,
 	numRows : 6,
 	numPiecesPlayed : 0, //Number of pieces in the game (divide by 2  and floow to get turn number)
 
-	validMove: function(cellID) {
-		//Check
+	initBoard: function(){
+		for(var i=0; i<this.numCols; i++) {
+			this.board[i] = new Array(this.numRows);
+		}
+	},
+
+	isValidMove: function(move) {
+		//Check if selected column is full by seeing if there is a value in top row
+		var validMove = (this.board[move.col][this.numRows-1] === undefined);
+		console.log("validMove: " + validMove);
+		return validMove;
 	}
+	
 };
 
 var view = {
@@ -91,6 +101,9 @@ function init() {
 	//Set welcome messege
 	view.setMsg("Welcome to Connect 4! Red goes first. Enjoy!");
 
+	//Initialize array
+	model.initBoard();
+
 	//Handle table cell click
 	$('td').click(function() {
 
@@ -103,7 +116,7 @@ function init() {
 			var move = new moveObj(model.currentPlayer, this.id);
 			
 			//Check for valid move
-			if (model.validMove(move)) {
+			if (model.isValidMove(move)) {
 				//Handle move
 				controller.handleMove(move);
 				
@@ -122,9 +135,10 @@ function init() {
 //Object to store move information
 var moveObj = function(player, cellID){
 	this.player = player;
-	this.row = model.numRows - cellID[0] -1; //Flip row number so row 0 is at bottom
+	//Code in case row is needed
+	// this.row = model.numRows - cellID[0] -1; //Flip row number so row 0 is at bottom
 	this.col = cellID[1];
-	console.log("Move: player: " + this.player + ", row: " + this.row + ", col: " + this.col);
+	console.log("Move: player: " + this.row + ", col: " + this.col);
 };
 
 
