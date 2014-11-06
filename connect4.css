@@ -7,6 +7,12 @@ body {
 	position: relative;
 	width: 347px;
 	height: 299px;
+	top: 49px;
+}
+
+#grid {
+	top: 98px;
+	position: absolute;
 }
 
 td {
