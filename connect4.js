@@ -11,7 +11,9 @@ $(document).ready(function() {
 
 var model = {
 	redTurn : true,
-	board : []
+	board : [[]],
+	numCols : 7,
+	numRows: 6
 
 };
 
