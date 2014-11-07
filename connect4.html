@@ -22,11 +22,11 @@
 			<header>
 				<h1>Connect Four!</h1>
 			</header>
-			<div id="msg"> </div>
-			<div id="gameArea">
-				<div id ="board">
-					
-				</div>
+
+			<h2 id="msg"></h2>
+			<div class="space"></div>
+
+			<div id="board">
 				<div id="grid">
 					<table>
 						<tr>
@@ -97,7 +97,12 @@
 				</div>
 
 			</div>
-
+			<div class="space"> </div>
+			<div class="pageButton">
+				<button id="restart">
+					New Game!
+				</button>
+			</div>
 			<footer>
 				<p>
 					&copy; Copyright 2014 by Aaron Pollon.
@@ -105,7 +110,8 @@
 			</footer>
 		</div>
 		<link rel="stylesheet" type="text/css" href="connect4.css"/>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+		<script src=jquery-min.js> </script>
 		<script type="text/javascript" src="connect4.js"></script>
 	</body>
 </html>

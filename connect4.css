@@ -1,5 +1,9 @@
 body {
-
+	background-color: orange;
+	font-family: "Comic Sans MS";
+}
+h1 {
+	text-align: center;
 }
 
 #board {
@@ -13,6 +17,16 @@ body {
 #grid {
 	top: 98px;
 	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+}
+#msg {
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+}
+.space {
+	height: 10px;
 }
 
 td {
@@ -33,5 +47,17 @@ td {
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
 	width: 46px;
+<<<<<<< HEAD
 	position: fixed;
 }
+=======
+}
+
+.pageButton {
+	text-align: center;
+}
+
+footer {
+	text-align: right;
+}
+>>>>>>> master

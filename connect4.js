@@ -39,8 +39,11 @@ var model = {
 		if((this.checkNumInRow(0, 1)) + ((this.checkNumInRow(0, -1))) >= 3) return true;
 		//check vertical
 		else if((this.checkNumInRow(1, 0)) + ((this.checkNumInRow(-1, 0))) >= 3) return true;
-		//Check diagonal
+		//Check diagonal1
 		else if((this.checkNumInRow(1, 1)) + ((this.checkNumInRow(-1, -1))) >= 3) return true;
+		//Check diagonal2
+		else if((this.checkNumInRow(-1, 1)) + ((this.checkNumInRow(1, -1))) >= 3) return true;
+
 		else return false;
 	},
 
@@ -97,6 +100,7 @@ var controller = {
 		if (model.checkForWin()) {
 			//Highlight winning pieces (using view method)
 			//Display winning messege (using view method)
+			alert(model.currentPlayer + " Wins!");
 			view.setMsg(model.currentPlayer + " Wins!");
 			//End game
 			model.gameActive = false;
@@ -107,6 +111,7 @@ var controller = {
 			//Print draw messege
 			view.setMsg("Board is full. It's a draw!");
 			//End game
+			model.gameActive = false;
 		} else {
 			//If game isn't over, switch to other player
 			this.updateTurn();
@@ -178,6 +183,12 @@ function init() {
 		}
 		//Else game is over, do nothing
 	});
+	
+	$("#restart").click(function() {
+		window.location.reload();
+		});
+		
+
 }
 
 //Object to store move information
