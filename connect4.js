@@ -80,7 +80,7 @@ var view = {
 		console.log("moveLocation: " + moveLocation + ", playerClass: " + playerClass);
 
 		var moveColID = '#C' + model.move.col;
-		$(moveColID).addClass(playerClass);
+		// $(moveColID).addClass(playerClass);
 
 		$(moveLocation).addClass(playerClass);
 	},

@@ -11,19 +11,21 @@ h1 {
 	position: relative;
 	width: 347px;
 	height: 299px;
-	top: 49px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #grid {
-	top: 98px;
 	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
+	top: -49px;
+	right: -3px;
 }
 #msg {
 	margin-left: auto;
 	margin-right: auto;
-	text-align:center;
+	text-align: center;
 }
 .space {
 	height: 10px;
@@ -38,19 +40,12 @@ td {
 	background-color: red;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
-	position: fixed;
 }
 
 .Black-piece {
 	background-color: black;
-	height: 47px;
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
-	width: 46px;
-<<<<<<< HEAD
-	position: fixed;
-}
-=======
 }
 
 .pageButton {
@@ -60,4 +55,3 @@ td {
 footer {
 	text-align: right;
 }
->>>>>>> master
