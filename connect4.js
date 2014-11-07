@@ -95,7 +95,9 @@ var view = {
 		$(moveColID).addClass(playerClass).animate({
 			top : $(moveLocation).position().top
 		}, speed, function() {
-			$(moveColID).css({top: 0});
+			$(moveColID).css({
+				top : 0
+			});
 			$(moveColID).removeClass(playerClass);
 			$(moveLocation).addClass(playerClass);
 			model.animDone = true;
@@ -201,6 +203,22 @@ function init() {
 
 	$("#restart").click(function() {
 		window.location.reload();
+	});
+
+	$("td").hover(function() {
+
+		var colNum = this.id[1];
+
+		for (var i = 0; i < model.numRows; i++) {
+			$("#" + i + colNum).addClass("hover");
+		}
+
+	}, function() {
+		var colNum = this.id[1];
+
+		for (var i = 0; i < model.numRows; i++) {
+			$("#" + i + colNum).removeClass("hover");
+		}
 	});
 
 }
