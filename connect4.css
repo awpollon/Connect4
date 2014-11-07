@@ -34,6 +34,7 @@ h1 {
 td {
 	width: 46px;
 	height: 47px;
+	position: relative;
 }
 
 .Red-piece {

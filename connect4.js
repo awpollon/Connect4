@@ -14,6 +14,7 @@ $(document).ready(function() {
 var model = {
 	move : undefined, //Current move
 	gameActive : true,
+	animDone : true,
 	redTurn : true, //Red always goes first. Update turn method assumes this
 	currentPlayer : "Red",
 	board : [[]], //board[column][row]
@@ -36,15 +37,20 @@ var model = {
 
 	checkForWin : function() {
 		//Check horizontal
-		if((this.checkNumInRow(0, 1)) + ((this.checkNumInRow(0, -1))) >= 3) return true;
+		if ((this.checkNumInRow(0, 1)) + ((this.checkNumInRow(0, -1))) >= 3)
+			return true;
 		//check vertical
-		else if((this.checkNumInRow(1, 0)) + ((this.checkNumInRow(-1, 0))) >= 3) return true;
+		else if ((this.checkNumInRow(1, 0)) + ((this.checkNumInRow(-1, 0))) >= 3)
+			return true;
 		//Check diagonal1
-		else if((this.checkNumInRow(1, 1)) + ((this.checkNumInRow(-1, -1))) >= 3) return true;
+		else if ((this.checkNumInRow(1, 1)) + ((this.checkNumInRow(-1, -1))) >= 3)
+			return true;
 		//Check diagonal2
-		else if((this.checkNumInRow(-1, 1)) + ((this.checkNumInRow(1, -1))) >= 3) return true;
-
-		else return false;
+		else if ((this.checkNumInRow(-1, 1)) + ((this.checkNumInRow(1, -1))) >= 3)
+			return true;
+		
+else
+			return false;
 	},
 
 	checkNumInRow : function(rowMod, colMod) {
@@ -56,12 +62,12 @@ var model = {
 		while (numOnSide < 3) {
 			r += parseInt(rowMod);
 			c += parseInt(colMod);
-			
+
 			//Check for board boudnary
 			if (r >= this.numRows || c >= this.numCols || c < 0 || r < 0)
 				break;
 			else if (this.board[c][r] === this.move.player) {
-				console.log("Match found at col: " + c +", row: " + r + "for " + this.move.player);
+				console.log("Match found at col: " + c + ", row: " + r + "for " + this.move.player);
 				numOnSide++;
 			} else
 				break;
@@ -80,15 +86,25 @@ var view = {
 		console.log("moveLocation: " + moveLocation + ", playerClass: " + playerClass);
 
 		var moveColID = '#C' + model.move.col;
-		// $(moveColID).addClass(playerClass);
+		var speedRatio = $(moveLocation).position().top / $("#50").position().top;
+		var speed = 1000 * speedRatio;
+		console.log("speed: " + speed + ", speedRatio: " + speedRatio);
 
-		$(moveLocation).addClass(playerClass);
+		//Make game temporary inactive to wait for animation to finish
+		model.animDone = false;
+		$(moveColID).addClass(playerClass).animate({
+			top : $(moveLocation).position().top
+		}, speed, function() {
+			$(moveColID).css({top: 0});
+			$(moveColID).removeClass(playerClass);
+			$(moveLocation).addClass(playerClass);
+			model.animDone = true;
+		});
 	},
 
 	setMsg : function(msg) {
 		$('#msg').text(msg);
 	}
-	
 };
 
 var controller = {
@@ -100,7 +116,6 @@ var controller = {
 		if (model.checkForWin()) {
 			//Highlight winning pieces (using view method)
 			//Display winning messege (using view method)
-			alert(model.currentPlayer + " Wins!");
 			view.setMsg(model.currentPlayer + " Wins!");
 			//End game
 			model.gameActive = false;
@@ -162,7 +177,7 @@ function init() {
 	$('td').click(function() {
 
 		//Check that game has not endede
-		if (model.gameActive) {
+		if (model.gameActive && model.animDone) {
 			//Display a piece at that location (for testing)
 			// view.displayPiece(this.id);
 
@@ -183,11 +198,10 @@ function init() {
 		}
 		//Else game is over, do nothing
 	});
-	
+
 	$("#restart").click(function() {
 		window.location.reload();
-		});
-		
+	});
 
 }
 
