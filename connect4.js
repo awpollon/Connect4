@@ -93,6 +93,7 @@ var view = {
 		//Make game temporary inactive to wait for animation to finish
 		model.animDone = false;
 		$(moveColID).addClass("piece");
+		document.getElementById("play").volume = .2;
 		document.getElementById("play").play();
 
 		$(moveColID).addClass(playerClass).animate({
@@ -109,7 +110,7 @@ var view = {
 			$(moveLocation).removeClass("hover");
 
 			model.animDone = true;
-			
+
 			document.getElementById("play").load();
 		});
 	},
