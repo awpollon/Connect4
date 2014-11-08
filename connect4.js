@@ -112,6 +112,24 @@ var view = {
 
 	setMsg : function(msg) {
 		$('#msg').text(msg);
+	},
+
+	highlightCol : function(cell) {
+		var colNum = cell.id[1];
+
+		for (var i = 0; i < model.numRows; i++) {
+			if (!$("#" + i + colNum).hasClass('piece')) {
+				$("#" + i + colNum).addClass("hover");
+			}
+		}
+	},
+
+	removeHighlight : function(cell) {
+		var colNum = cell.id[1];
+
+		for (var i = 0; i < model.numRows; i++) {
+			$("#" + i + colNum).removeClass("hover");
+		}
 	}
 };
 
@@ -181,7 +199,6 @@ function init() {
 	//Initialize array
 	model.initBoard();
 
-	$("td").addClass('slot');
 	//Handle table cell click
 	$('td').click(function() {
 
@@ -209,26 +226,14 @@ function init() {
 	});
 
 	$("#restart").click(function() {
-		// $('body').append('<embed src="/resources/restart.mp3" autostart="true" hidden="true" loop="false">');
 		window.location.reload();
 	});
 
 	$("td").hover(function() {
-
-		var colNum = this.id[1];
-
-		for (var i = 0; i < model.numRows; i++) {
-			if(!$("#" + i + colNum).hasClass('piece')){
-				$("#" + i + colNum).addClass("hover");
-			}
-		}
+		view.highlightCol(this);
 
 	}, function() {
-		var colNum = this.id[1];
-
-		for (var i = 0; i < model.numRows; i++) {
-			$("#" + i + colNum).removeClass("hover");
-		}
+		view.removeHighlight(this);
 	});
 
 }
@@ -237,7 +242,6 @@ function init() {
 var moveObj = function(player, cellID) {
 	this.player = player;
 	//Code in case row is needed
-	// this.row = model.numRows - cellID[0] -1; //Flip row number so row 0 is at bottom
 	this.col = cellID[1];
 	console.log("Move: player: " + this.player + ", col: " + this.col);
 };
