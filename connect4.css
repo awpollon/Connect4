@@ -39,12 +39,17 @@ td {
 
 .Red-piece {
 	background-color: red;
-	-moz-border-radius: 39px;
-	-webkit-border-radius: 39px;
 }
 
 .Black-piece {
 	background-color: black;
+}
+
+.slot {
+	
+}
+
+.piece{
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
 }
@@ -61,3 +66,4 @@ footer {
 	background-color: yellow;
 	opacity: .3;
 }
+

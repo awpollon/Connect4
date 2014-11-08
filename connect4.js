@@ -92,6 +92,7 @@ var view = {
 
 		//Make game temporary inactive to wait for animation to finish
 		model.animDone = false;
+		$(moveColID).addClass("piece");
 		$(moveColID).addClass(playerClass).animate({
 			top : $(moveLocation).position().top
 		}, speed, function() {
@@ -99,7 +100,12 @@ var view = {
 				top : 0
 			});
 			$(moveColID).removeClass(playerClass);
+			$(moveColID).removeClass("piece");
+
+			$(moveLocation).addClass("piece");
 			$(moveLocation).addClass(playerClass);
+			$(moveLocation).removeClass("hover");
+
 			model.animDone = true;
 		});
 	},
@@ -175,6 +181,7 @@ function init() {
 	//Initialize array
 	model.initBoard();
 
+	$("td").addClass('slot');
 	//Handle table cell click
 	$('td').click(function() {
 
@@ -211,7 +218,9 @@ function init() {
 		var colNum = this.id[1];
 
 		for (var i = 0; i < model.numRows; i++) {
-			$("#" + i + colNum).addClass("hover");
+			if(!$("#" + i + colNum).hasClass('piece')){
+				$("#" + i + colNum).addClass("hover");
+			}
 		}
 
 	}, function() {
