@@ -87,12 +87,14 @@ var view = {
 
 		var moveColID = '#C' + model.move.col;
 		var speedRatio = $(moveLocation).position().top / $("#50").position().top;
-		var speed = 1000 * speedRatio;
+		var speed = 300 * speedRatio;
 		console.log("speed: " + speed + ", speedRatio: " + speedRatio);
 
 		//Make game temporary inactive to wait for animation to finish
 		model.animDone = false;
 		$(moveColID).addClass("piece");
+		document.getElementById("play").play();
+
 		$(moveColID).addClass(playerClass).animate({
 			top : $(moveLocation).position().top
 		}, speed, function() {
@@ -107,6 +109,8 @@ var view = {
 			$(moveLocation).removeClass("hover");
 
 			model.animDone = true;
+			
+			document.getElementById("play").load();
 		});
 	},
 
