@@ -203,8 +203,7 @@ function init() {
 
 	$("#restart").click(function() {
 		// $('body').append('<embed src="/resources/restart.mp3" autostart="true" hidden="true" loop="false">');
-		$("#restartSound").play();
-		// window.location.reload();
+		window.location.reload();
 	});
 
 	$("td").hover(function() {
