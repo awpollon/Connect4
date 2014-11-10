@@ -45,13 +45,11 @@ td {
 	background-color: black;
 }
 
-.slot {
-	
-}
-
-.piece{
+.piece {
 	-moz-border-radius: 39px;
 	-webkit-border-radius: 39px;
+	top: -9px;
+	left: 1px;
 }
 
 .pageButton {
@@ -67,3 +65,6 @@ footer {
 	opacity: .3;
 }
 
+.hidden {
+	visibility: hidden;
+}

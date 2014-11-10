@@ -97,7 +97,7 @@ var view = {
 		document.getElementById("play").play();
 
 		$(moveColID).addClass(playerClass).animate({
-			top : $(moveLocation).position().top
+			top : $(moveLocation).position().top - 9
 		}, speed, function() {
 			$(moveColID).css({
 				top : 0
@@ -135,6 +135,19 @@ var view = {
 		for (var i = 0; i < model.numRows; i++) {
 			$("#" + i + colNum).removeClass("hover");
 		}
+	},
+
+	emptyBoard : function() {
+		document.getElementById("empty").volume = .2;		
+		document.getElementById("empty").play();
+
+		$(".piece").animate({
+			top : 270,
+		}, 300, function() {
+			$(".piece").addClass('hidden');
+			document.getElementById("empty").load();
+			window.location.reload();
+		});
 	}
 };
 
@@ -231,7 +244,7 @@ function init() {
 	});
 
 	$("#restart").click(function() {
-		window.location.reload();
+		view.emptyBoard();
 	});
 
 	$("td").hover(function() {
